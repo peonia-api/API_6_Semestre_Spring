@@ -1,3 +1,3 @@
-## Desenvolvimento do Front-end com Vue.js 
+## Desenvolvimento do Back-end com Spring Boot
 
-Este repositório foi criado para o desenvolvimento do front-end utilizando Vue.js para o desenvolvimento do API do 6° semestre.
+Este repositório foi criado para o desenvolvimento do back-end utilizando spring boot para o desenvolvimento do API do 6° semestre.
