@@ -8,16 +8,27 @@ import java.time.LocalTime;
 @Table(name = "record")
 public class Record {
 
+    public enum OccurrenceType {
+        ENTRANCE, EXIT
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rec_id")
     private Long id;
 
     @Column(name = "rec_occurrence")
-    private String occurrence;
+    @Enumerated(EnumType.STRING)
+    private OccurrenceType occurrence;
 
     @Column(name = "rec_date")
     private LocalDate date;
+
+    @Column(name = "rec_hour")
+    private LocalTime hour;
+
+    @Column(name = "rec_room")
+    private String room;
 
     public Long getId() {
         return id;
@@ -27,11 +38,11 @@ public class Record {
         this.id = id;
     }
 
-    public String getOccurrence() {
+    public OccurrenceType getOccurrence() {
         return occurrence;
     }
 
-    public void setOccurrence(String occurrence) {
+    public void setOccurrence(OccurrenceType occurrence) {
         this.occurrence = occurrence;
     }
 
@@ -51,6 +62,11 @@ public class Record {
         this.hour = hour;
     }
 
-    @Column(name = "rec_hour")
-    private LocalTime hour;
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
 }
