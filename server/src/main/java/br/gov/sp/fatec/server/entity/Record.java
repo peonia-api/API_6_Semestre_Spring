@@ -1,11 +1,12 @@
 package br.gov.sp.fatec.server.entity;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Entity
-@Table(name = "record")
+@Document(collection = "record")
 public class Record {
 
     public enum OccurrenceType {
@@ -13,36 +14,29 @@ public class Record {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rec_id")
-    private Long id;
+    private String id;
 
-    @Column(name = "rec_occurrence")
-    @Enumerated(EnumType.STRING)
-    private OccurrenceType occurrence;
+    private String occurrence;
 
-    @Column(name = "rec_date")
     private LocalDate date;
 
-    @Column(name = "rec_hour")
     private LocalTime hour;
 
-    @Column(name = "rec_room")
     private String room;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public OccurrenceType getOccurrence() {
+    public String getOccurrence() {
         return occurrence;
     }
 
-    public void setOccurrence(OccurrenceType occurrence) {
+    public void setOccurrence(String occurrence) {
         this.occurrence = occurrence;
     }
 

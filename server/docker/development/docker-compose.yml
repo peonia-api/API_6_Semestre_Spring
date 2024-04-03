@@ -1,6 +1,7 @@
 version: '3'
 
 services:
+  # Existing MongoDB service
   mongodb:
     image: mongo
     container_name: mongodb
@@ -11,10 +12,23 @@ services:
     networks:
       - app-network
 
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    ports:
+      - "8888:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_PORT=27017
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+
   server:
     build:
       context: ../../
-      dockerfile: server/Dockerfile
+      dockerfile: Dockerfile
     container_name: server
     ports:
       - "8080:8080"
