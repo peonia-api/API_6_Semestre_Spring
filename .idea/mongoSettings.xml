@@ -4,7 +4,8 @@
     <option name="serverConfigurations">
       <set>
         <ServerConfiguration>
-          <option name="label" value="@localhost" />
+          <option name="authenticationMechanism" value="SCRAM-SHA-1" />
+          <option name="label" value="altave" />
           <option name="password" value="rootpass" />
           <option name="serverUrls">
             <list>
@@ -15,7 +16,6 @@
           <option name="sshTunnelingConfiguration">
             <SshTunnelingConfiguration />
           </option>
-          <option name="userDatabase" value="altave" />
           <option name="username" value="rootuser" />
         </ServerConfiguration>
       </set>

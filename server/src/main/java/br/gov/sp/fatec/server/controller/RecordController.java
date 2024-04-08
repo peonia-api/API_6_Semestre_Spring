@@ -3,6 +3,8 @@ package br.gov.sp.fatec.server.controller;
 import br.gov.sp.fatec.server.entity.Record;
 import br.gov.sp.fatec.server.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,24 +12,25 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/record")
 @CrossOrigin
-
 public class RecordController {
     @Autowired
     private RecordService service;
 
     @GetMapping
-    public List<Record> listRecordsByOccurrence(Record.OccurrenceType occurrence) {
-        return service.listRecordsByOccurrence(occurrence);
+    public ResponseEntity<List<Record>> listRecordsByOccurrence(@RequestParam Record.OccurrenceType occurrence) {
+        List<Record> records = service.listRecordsByOccurrence(occurrence);
+        return new ResponseEntity<>(records, HttpStatus.OK);
     }
 
     @GetMapping("/all")
-    public List<Record> listAllRecords() {
-        return service.listAllRecords();
+    public ResponseEntity<List<Record>> listAllRecords() {
+        List<Record> records = service.listAllRecords();
+        return new ResponseEntity<>(records, HttpStatus.OK);
     }
 
     @PostMapping
-    public Record createRecord(@RequestBody Record record) {
-        return service.createRecord(record);
+    public ResponseEntity<Record> createRecord(@RequestBody Record record) {
+        Record createdRecord = service.createRecord(record);
+        return new ResponseEntity<>(createdRecord, HttpStatus.CREATED);
     }
-
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.*;
 import java.util.List;
 
 @Service
@@ -22,16 +23,17 @@ public class RecordService {
         if (record == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Record cannot be null");
         }
-        if (record.getDate() == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Date field is required");
+
+        if (record.getDateTime() == null) {
+            if (record.getDateTime() == null) {
+                LocalDateTime nowBR = LocalDateTime.now().minusHours(3);
+                record.setDateTime(nowBR);
+            }
         }
-        if (record.getHour() == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Hour field is required");
-        }
+
         if (record.getRoom() == null)  {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Room field is required");
         }
-
 
         try {
             return recordRepository.save(record);
@@ -40,9 +42,7 @@ public class RecordService {
         } catch (DataAccessException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database error occurred", e);
         }
-
     }
-
     public List<Record> listRecordsByOccurrence(Record.OccurrenceType occurrence) {
         return recordRepository.findByOccurrence(occurrence);
     }

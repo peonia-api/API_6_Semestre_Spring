@@ -4,10 +4,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Document(collection = "record")
 public class Record {
+
 
     public enum OccurrenceType {
         ENTRANCE, EXIT
@@ -18,9 +20,7 @@ public class Record {
 
     private String occurrence;
 
-    private LocalDate date;
-
-    private LocalTime hour;
+    private LocalDateTime dateTime;
 
     private String room;
 
@@ -40,20 +40,12 @@ public class Record {
         this.occurrence = occurrence;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public LocalTime getHour() {
-        return hour;
-    }
-
-    public void setHour(LocalTime hour) {
-        this.hour = hour;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getRoom() {
