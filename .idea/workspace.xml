@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec0a33c2-1fb3-4640-b6b9-a399f85d621d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/mongoSettings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/br/gov/sp/fatec/server/controller/RecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/br/gov/sp/fatec/server/controller/RecordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/br/gov/sp/fatec/server/entity/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/br/gov/sp/fatec/server/entity/Record.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/br/gov/sp/fatec/server/service/RecordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/br/gov/sp/fatec/server/service/RecordService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
