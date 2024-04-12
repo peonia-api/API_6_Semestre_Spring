@@ -17,7 +17,7 @@ public class RecordController {
     private RecordService service;
 
     @GetMapping
-    public ResponseEntity<List<Record>> listRecordsByOccurrence(@RequestParam Record.OccurrenceType occurrence) {
+    public ResponseEntity<List<Record>> listRecordsByOccurrence(@RequestParam("occurrence") Record.OccurrenceType occurrence) {
         List<Record> records = service.listRecordsByOccurrence(occurrence);
         return new ResponseEntity<>(records, HttpStatus.OK);
     }
