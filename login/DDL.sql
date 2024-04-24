@@ -1,27 +1,22 @@
--- Apaga o schema e o usuário se já existirem
-drop schema if exists spring;
-drop user if exists 'user'@'localhost';
+DROP SCHEMA IF EXISTS login;
+DROP USER IF EXISTS 'user'@'localhost';
 
--- Cria um novo schema chamado spring
-create schema spring;
+CREATE SCHEMA login;
 
--- Cria um novo usuário e define uma senha
-create user 'user'@'localhost' identified by 'pass123';
+CREATE USER 'user'@'localhost' IDENTIFIED BY 'pass123';
 
--- Concede permissões para o usuário no schema spring
-grant select, insert, delete, update on spring.* to 'user'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE ON spring.* TO 'user'@'localhost';
 
--- Seleciona o schema spring para uso
-use spring;
+USE login;
 
--- Cria a tabela para a entidade User com todas as colunas necessárias
-create table usr_usuario (
-  usr_id bigint unsigned not null auto_increment,
-  usr_name varchar(255) not null, -- Coluna para o nome
-  usr_surname varchar(255), -- Coluna para o sobrenome
-  usr_password varchar(150) not null, -- Coluna para a senha
-  usr_email varchar(255) unique, -- Coluna para o email com restrição unique
-  usr_function varchar(255), -- Coluna para a função
-  primary key (usr_id),
-  unique key uni_user_name (usr_name) -- Chave única baseada no nome do usuário
+CREATE TABLE usr_user (
+  usr_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  usr_name VARCHAR(255) NOT NULL,
+  usr_surname VARCHAR(255),
+  usr_password VARCHAR(150) NOT NULL,
+  usr_email VARCHAR(255),
+  usr_function VARCHAR(255),
+  PRIMARY KEY (usr_id),
+  UNIQUE KEY uni_usr_email (usr_email),
+  UNIQUE KEY uni_usr_name (usr_name)
 );
