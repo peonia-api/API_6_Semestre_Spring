@@ -1,7 +1,7 @@
-package br.gov.sp.fatec.login.service;
+package br.gov.sp.fatec.server.service;
 
-import br.gov.sp.fatec.login.entity.Record;
-import br.gov.sp.fatec.login.repository.RecordRepository;
+import br.gov.sp.fatec.server.entity.Record;
+import br.gov.sp.fatec.server.repository.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;

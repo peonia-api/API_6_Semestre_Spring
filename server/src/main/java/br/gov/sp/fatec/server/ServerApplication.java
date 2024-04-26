@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.login;
+package br.gov.sp.fatec.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

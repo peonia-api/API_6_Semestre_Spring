@@ -1,7 +1,7 @@
-package br.gov.sp.fatec.login.controller;
+package br.gov.sp.fatec.server.controller;
 
-import br.gov.sp.fatec.login.entity.Record;
-import br.gov.sp.fatec.login.service.RecordService;
+import br.gov.sp.fatec.server.entity.Record;
+import br.gov.sp.fatec.server.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

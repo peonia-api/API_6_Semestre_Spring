@@ -1,10 +1,10 @@
-package br.gov.sp.fatec.login;
+package br.gov.fatec.login;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ServerApplicationTests {
+class LoginApplicationTests {
 
 	@Test
 	void contextLoads() {

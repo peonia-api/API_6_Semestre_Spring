@@ -1,7 +1,8 @@
-package br.gov.sp.fatec.login.controller;
+package br.gov.fatec.login.controller;
 
-import br.gov.sp.fatec.login.entity.User;
-import br.gov.sp.fatec.login.service.UserService;
+
+import br.gov.fatec.login.entity.User;
+import br.gov.fatec.login.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

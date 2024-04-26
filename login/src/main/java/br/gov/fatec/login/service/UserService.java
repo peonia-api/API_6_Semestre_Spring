@@ -1,7 +1,8 @@
-package br.gov.sp.fatec.login.service;
+package br.gov.fatec.login.service;
 
-import br.gov.sp.fatec.login.entity.User;
-import br.gov.sp.fatec.login.repository.UserRepository;
+
+import br.gov.fatec.login.entity.User;
+import br.gov.fatec.login.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

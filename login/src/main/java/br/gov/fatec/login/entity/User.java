@@ -1,10 +1,8 @@
-package br.gov.sp.fatec.login.entity;
+package br.gov.fatec.login.entity;
 
-import jakarta.persistence.GenerationType;
-import org.springframework.data.annotation.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.*;
 
+@Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
