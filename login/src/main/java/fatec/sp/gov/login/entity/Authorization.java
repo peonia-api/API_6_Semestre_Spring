@@ -6,14 +6,15 @@ import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "authorizations")
 public class Authorization {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "aut_id")
-    private Long id;
+    private UUID id;
 
     @Column(name = "aut_name")
     private String name;
@@ -27,11 +28,11 @@ public class Authorization {
     public Authorization(String name) {
         this.name = name;
     }
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
