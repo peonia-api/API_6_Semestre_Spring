@@ -25,6 +25,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @PreAuthorize("hasRole('ADMIN')")
     public List<User> findAll() {
         return userRepo.findAll();
     }
@@ -57,24 +58,26 @@ public class UserService {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    public User findById(Long id) {
+    public User findById(UUID id) {
         Optional<User> userOption = userRepo.findById(id);
         if (userOption.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found");
         }
+
         return userOption.get();
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    public void deleteUser(Long id) {
+    public String deleteUser(UUID id) {
         if (!userRepo.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found");
         }
         userRepo.deleteById(id);
+        return "Removed user with success: ";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    public User updateUser(Long id, User user) {
+    public User updateUser(UUID id, User user) {
         if (user == null || user.getName() == null || user.getName().isBlank() ||
                 user.getSurname() == null || user.getSurname().isBlank() ||
                 user.getEmail() == null || user.getEmail().isBlank() ||
@@ -88,9 +91,23 @@ public class UserService {
             existingUser.setSurname(user.getSurname());
             existingUser.setEmail(user.getEmail());
             existingUser.setFunction(user.getFunction());
-            existingUser.setPassword(user.getPassword());
+            existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+
+            if (!user.getAuthorizations().isEmpty()) {
+                Set<Authorization> updatedAuthorizations = new HashSet<>();
+                for (Authorization aut : user.getAuthorizations()) {
+                    Authorization autBd = autRepo.findByName(aut.getName());
+                    if (autBd == null) {
+                        autBd = autRepo.save(new Authorization(aut.getName()));
+                    }
+                    updatedAuthorizations.add(autBd);
+                }
+                existingUser.setAuthorizations(updatedAuthorizations);
+            }
+
             return userRepo.save(existingUser);
         }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found"));
     }
+
 
 }
