@@ -19,7 +19,6 @@ public class RecordController {
     @Autowired
     private Viarecord viarecord;
 
-
     @GetMapping
     public ResponseEntity<List<Register>> getAllRecords(@RequestParam(required = false) String occurrence) {
         List<Register> records;

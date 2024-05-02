@@ -20,9 +20,8 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         try {
             HttpServletRequest servletRequest = (HttpServletRequest) request;
             String authorization = servletRequest.getHeader(HttpHeaders.AUTHORIZATION);
-            if (authorization != null) {
-                Authentication credentials = JwtUtils
-                        .parseToken(authorization.replaceAll("Bearer ", ""));
+            if (authorization != null && authorization.startsWith("Bearer ")) {
+                Authentication credentials = JwtUtils.parseToken(authorization.replaceAll("Bearer ", ""));
                 SecurityContextHolder.getContext().setAuthentication(credentials);
             }
             chain.doFilter(request, response);
@@ -31,4 +30,5 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
             servletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, t.getMessage());
         }
     }
+
 }
