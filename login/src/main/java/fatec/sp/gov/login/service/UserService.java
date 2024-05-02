@@ -1,5 +1,7 @@
 package fatec.sp.gov.login.service;
 
+import fatec.sp.gov.login.client.via.record.Register;
+import fatec.sp.gov.login.client.via.record.Viarecord;
 import fatec.sp.gov.login.entity.Authorization;
 import fatec.sp.gov.login.entity.User;
 import fatec.sp.gov.login.repository.AuthorizationRepository;

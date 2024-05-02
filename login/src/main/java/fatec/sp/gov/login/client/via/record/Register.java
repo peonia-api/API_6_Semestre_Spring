@@ -4,7 +4,11 @@ import java.time.LocalDateTime;
 
 public record Register(
         String id,
-        String occurrence,
+        OccurrenceType occurrence,
         LocalDateTime dateTime,
         String room
-){}
+) {
+    public enum OccurrenceType {
+        ENTRANCE, EXIT
+    }
+}

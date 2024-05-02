@@ -19,15 +19,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @Autowired
-    private Viarecord viarecord;
 
-
-    @GetMapping("/records")
-    public ResponseEntity<List<Register>> getAllRecords() {
-        List<Register> records = viarecord.getRecords();
-        return ResponseEntity.ok(records);
-    }
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
