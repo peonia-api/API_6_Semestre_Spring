@@ -24,16 +24,19 @@ public class LoginController {
 
     @PostMapping
     public Login autenticar(@RequestBody Login login) throws JsonProcessingException {
-        Authentication auth = new UsernamePasswordAuthenticationToken(login.getEmail(),
-                login.getPassword());
-        auth = authManager.authenticate(auth);
-        login.setToken(JwtUtils.generateToken(auth));
-        return login;
+        try {
+            Authentication auth = new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword());
+            auth = authManager.authenticate(auth); // Autentica o usuário
+            login.setToken(JwtUtils.generateToken(auth)); // Gera o token após a autenticação bem-sucedida
+            login.setPassword(null); // Limpa a senha por segurança
+            return login;
+        } catch (Exception e) {
+            throw new RuntimeException("Falha na autenticação", e);
+        }
     }
 
     @GetMapping
     public String message() {
         return "Login page. Use POST.";
     }
-
 }

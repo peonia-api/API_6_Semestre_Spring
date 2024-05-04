@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface UserRepository extends JpaRepository<User, UUID> {  // Alterado para UUID
+public interface UserRepository extends JpaRepository<User, UUID> {
 
     Optional<User> searchByName(String nameUser);
 
@@ -32,5 +32,5 @@ public interface UserRepository extends JpaRepository<User, UUID> {  // Alterado
     @Query("select u from User u join u.authorizations a where a.name = ?1")
     List<User> searchByNameAuthorization(String nameAuthorization);
 
-    // Removido os métodos com assinaturas incorretas utilizando UUID onde deveriam usar comparações diretas
+
 }

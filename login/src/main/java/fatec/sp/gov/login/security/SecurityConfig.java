@@ -29,6 +29,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/user/me").authenticated()
                         .requestMatchers("/user/records").authenticated()  // Requer autenticação para este endpoint
                         .anyRequest().permitAll())  // Permite todos os outros requests sem autenticação
                 .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)

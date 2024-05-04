@@ -19,6 +19,10 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    @GetMapping("/me")
+    public ResponseEntity<User> getCurrentUser() {
+        return ResponseEntity.ok(service.getCurrentUser());
+    }
 
 
     @GetMapping
