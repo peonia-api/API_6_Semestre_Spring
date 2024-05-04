@@ -34,6 +34,10 @@ public class RecordService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Room field is required");
         }
 
+        if (record.getCount() == null) {
+            record.setCount(0);
+        }
+
         try {
             return recordRepository.save(record);
         } catch (DataIntegrityViolationException e) {
