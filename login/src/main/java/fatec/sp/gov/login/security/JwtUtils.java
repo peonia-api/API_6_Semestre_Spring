@@ -53,7 +53,7 @@ public class JwtUtils {
         Login user = mapper.readValue(credentialsJson, Login.class);
         UserDetails userDetails = User.builder().username(user.getEmail()).password("secret")
                 .authorities(user.getAuthorities().toArray(new String[user.getAuthorities().size()])).build();
-        return new UsernamePasswordAuthenticationToken(user.getPassword(), user.getPassword(),
+        return new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword(),
                 userDetails.getAuthorities());
     }
     public static String getKey() {
