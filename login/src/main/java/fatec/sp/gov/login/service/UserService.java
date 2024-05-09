@@ -66,7 +66,7 @@ public class UserService {
                 user.getEmail() == null || user.getEmail().isBlank() ||
                 user.getFunction() == null || user.getFunction().isBlank() ||
                 user.getPassword() == null || user.getPassword().isBlank()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dados inválidos!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid data");
         }
         if(!user.getAuthorizations().isEmpty()) {
             Set<Authorization> autorizations = new HashSet<Authorization>();
