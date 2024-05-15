@@ -19,6 +19,17 @@ public class Authorization {
     @Column(name = "aut_name")
     private String name;
 
+    @Column(name = "aut_permission_type")
+    @Enumerated(EnumType.STRING)
+    private PermissionType permissionType;
+
+    public Authorization(String name, PermissionType permissionType) {
+        this.name = name;
+        this.permissionType = permissionType;
+    }
+
+
+
     @JsonIgnore
     @ManyToMany(mappedBy = "authorizations")
     private Set<User> users = new HashSet<User>();
