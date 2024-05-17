@@ -19,6 +19,12 @@ public class AreaController {
     private AreaService areaService;
 
 
+    @PostMapping
+    public ResponseEntity<Area> createArea(@RequestBody Area area) {
+        return ResponseEntity.ok(areaService.createArea(area));
+    }
+
+
     @GetMapping
     public ResponseEntity<List<Area>> getAlAreas() {
         return ResponseEntity.ok(areaService.findAll());

@@ -30,6 +30,15 @@ public class User {
     @Column(name = "usr_function")
     private String function;
 
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<RedZones> redZones = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Area> areas = new HashSet<>();
+
+
     @ManyToMany
     @JoinTable(name = "uau_user_authorization",
             joinColumns = { @JoinColumn(name = "usr_id")},

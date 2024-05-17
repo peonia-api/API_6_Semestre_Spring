@@ -28,8 +28,6 @@ public class Authorization {
         this.permissionType = permissionType;
     }
 
-
-
     @JsonIgnore
     @ManyToMany(mappedBy = "authorizations")
     private Set<User> users = new HashSet<User>();

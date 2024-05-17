@@ -1,15 +1,14 @@
 package fatec.sp.gov.login.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
+@Entity
+@Table(name = "redZones")
 public class RedZones {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "red_id")
     private UUID id;
 
@@ -24,6 +23,14 @@ public class RedZones {
 
     @Column(name = "red_personLimit")
     private int personLimit;
+
+    @Column(name = "red_responsibleGuard")
+    private String responsibleGuard;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
     public RedZones(UUID id, String name, String description, String cameraSpot, int personLimit) {
         this.id = id;
