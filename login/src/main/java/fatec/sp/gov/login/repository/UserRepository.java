@@ -27,10 +27,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     @Query("select u from User u where u.name = ?1 and u.password = ?2")
     Optional<User> searchByNameAndPassword(String nameUser, String password);
 
-    List<User> findByAuthorizationsName(String nameAuthorization);
 
-    @Query("select u from User u join u.authorizations a where a.name = ?1")
-    List<User> searchByNameAuthorization(String nameAuthorization);
 
 
 }

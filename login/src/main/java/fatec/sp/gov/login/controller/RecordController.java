@@ -20,6 +20,7 @@ public class RecordController {
     private Viarecord viarecord;
 
     @GetMapping
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<Register>> getAllRecords(@RequestParam(required = false) String occurrence) {
         List<Register> records;
         if (occurrence != null) {

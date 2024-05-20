@@ -30,6 +30,11 @@ public class User {
     @Column(name = "usr_function")
     private String function;
 
+    @Column(name = "usr_permission_type")
+    @Enumerated(EnumType.STRING)
+    private PermissionType permissionType;
+
+
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -39,12 +44,6 @@ public class User {
     private Set<Area> areas = new HashSet<>();
 
 
-    @ManyToMany
-    @JoinTable(name = "uau_user_authorization",
-            joinColumns = { @JoinColumn(name = "usr_id")},
-            inverseJoinColumns = { @JoinColumn(name = "aut_id") }
-    )
-    private Set<Authorization> authorizations = new HashSet<Authorization>();
 
 
     public UUID getId() {
@@ -95,12 +94,28 @@ public class User {
         this.function = function;
     }
 
-    public Set<Authorization> getAuthorizations() {
-        return authorizations;
+    public PermissionType getPermissionType() {
+        return permissionType;
     }
 
-    public void setAuthorizations(Set<Authorization> authorizations) {
-        this.authorizations = authorizations;
+    public void setPermissionType(PermissionType permissionType) {
+        this.permissionType = permissionType;
+    }
+
+    public Set<RedZones> getRedZones() {
+        return redZones;
+    }
+
+    public void setRedZones(Set<RedZones> redZones) {
+        this.redZones = redZones;
+    }
+
+    public Set<Area> getAreas() {
+        return areas;
+    }
+
+    public void setAreas(Set<Area> areas) {
+        this.areas = areas;
     }
 
     @Override

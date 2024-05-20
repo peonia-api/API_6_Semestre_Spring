@@ -1,8 +1,7 @@
 package fatec.sp.gov.login.service;
 
-import fatec.sp.gov.login.entity.Authorization;
+import fatec.sp.gov.login.entity.PermissionType;
 import fatec.sp.gov.login.entity.User;
-import fatec.sp.gov.login.repository.AuthorizationRepository;
 import fatec.sp.gov.login.repository.UserRepository;
 import fatec.sp.gov.login.client.via.record.Viarecord;
 import fatec.sp.gov.login.client.via.record.Register;
@@ -25,8 +24,6 @@ public class RecordService {
     @Autowired
     private UserRepository userRepo;
 
-    @Autowired
-    private AuthorizationRepository autRepo;
 
     @PreAuthorize("isAuthenticated()")
     public List<Register> findAllRecords() {
@@ -36,7 +33,7 @@ public class RecordService {
         User user = userRepo.findByName(currentUserName).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
-        if (!user.getAuthorizations().isEmpty()) {
+        if (user.getPermissionType().equals(PermissionType.ROLE_ADMIN) || user.getPermissionType().equals(PermissionType.ROLE_MANAGER) || user.getPermissionType().equals(PermissionType.ROLE_GUARD)) {
             return viarecord.getRecords("ALL");
         } else {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User does not have any authorizations");

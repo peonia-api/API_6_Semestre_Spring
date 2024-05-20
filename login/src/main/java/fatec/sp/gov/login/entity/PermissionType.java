@@ -1,8 +1,7 @@
 package fatec.sp.gov.login.entity;
 
 public enum PermissionType {
-    ADMIN,
-    MANAGER,
-    GUARD
-
+    ROLE_ADMIN,
+    ROLE_MANAGER,
+    ROLE_GUARD
 }

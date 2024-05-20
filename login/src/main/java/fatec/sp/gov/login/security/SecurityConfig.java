@@ -2,12 +2,6 @@ package fatec.sp.gov.login.security;
 
 import java.util.List;
 
-import fatec.sp.gov.login.entity.Authorization;
-import fatec.sp.gov.login.entity.PermissionType;
-import fatec.sp.gov.login.repository.AuthorizationRepository;
-import fatec.sp.gov.login.repository.UserRepository;
-import fatec.sp.gov.login.security.JwtAuthenticationFilter;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,17 +22,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-
-    @Bean
-    CommandLineRunner commandLineRunner(UserRepository repository, AuthorizationRepository authorizationRepository) {
-        return args -> {
-            if(authorizationRepository.count() == 0) {
-                authorizationRepository.save(new Authorization("ROLE_ADMIN", PermissionType.ADMIN));
-                authorizationRepository.save(new Authorization("ROLE_GERENTE", PermissionType.MANAGER));
-                authorizationRepository.save(new Authorization("ROLE_GUARDA", PermissionType.GUARD));
-            }
-        };
-    }
 
 
     @Bean
