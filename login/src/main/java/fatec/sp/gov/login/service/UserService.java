@@ -68,23 +68,26 @@ public class UserService {
                 user.getPassword() == null || user.getPassword().isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid data");
         }
-        if(!user.getAuthorizations().isEmpty()) {
-            Set<Authorization> autorizations = new HashSet<Authorization>();
-            for(Authorization aut: user.getAuthorizations()) {
-                if(aut.getName() != null && !aut.getName().isBlank()) {
-                    Authorization autBd = autRepo.findByName(aut.getName());
-                    if(autBd == null) {
-                        autBd = autRepo.save(new Authorization(aut.getName()));
+        if (!user.getAuthorizations().isEmpty()) {
+            Set<Authorization> authorizations = new HashSet<>();
+            for (Authorization auth : user.getAuthorizations()) {
+                if (auth.getName() != null && !auth.getName().isBlank()) {
+                    Authorization authDb = autRepo.findByName(auth.getName());
+                    if (authDb == null) {
+                        authDb = new Authorization(auth.getName(), auth.getPermissionType());
+                        authDb = autRepo.save(authDb);
+                    } else {
+                        authDb.setPermissionType(auth.getPermissionType());
                     }
-                    autorizations.add(autBd);
+                    authorizations.add(authDb);
                 }
             }
-            user.setAuthorizations(autorizations);
+            user.setAuthorizations(authorizations);
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         return userRepo.save(user);
     }
+
 
     @PreAuthorize("hasRole('ADMIN')")
     public User findById(UUID id) {

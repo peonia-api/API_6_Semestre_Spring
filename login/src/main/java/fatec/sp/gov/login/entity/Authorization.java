@@ -1,6 +1,5 @@
 package fatec.sp.gov.login.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -30,13 +29,14 @@ public class Authorization {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "authorizations")
-    private Set<User> users = new HashSet<User>();
+    private Set<User> users = new HashSet<>();
 
     public Authorization() {}
 
     public Authorization(String name) {
         this.name = name;
     }
+
     public UUID getId() {
         return id;
     }
@@ -51,6 +51,14 @@ public class Authorization {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public PermissionType getPermissionType() {
+        return permissionType;
+    }
+
+    public void setPermissionType(PermissionType permissionType) {
+        this.permissionType = permissionType;
     }
 
     public Set<User> getUsers() {
