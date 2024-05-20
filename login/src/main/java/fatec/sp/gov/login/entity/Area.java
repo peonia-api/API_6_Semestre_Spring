@@ -21,15 +21,30 @@ public class Area {
     @Column(name = "are_description")
     private String description;
 
+    @Column(name = "are_responsibleManager")
+    private String responsibleManager;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Area(UUID id, String name, String description, User user) {
+    @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<RedZones> redZones = new HashSet<>();
+
+    public Area(UUID id, String name, String description, String responsibleManager, User user) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.responsibleManager = responsibleManager;
         this.user = user;
+    }
+
+    public String getResponsibleManager() {
+        return responsibleManager;
+    }
+
+    public void setResponsibleManager(String responsibleManager) {
+        this.responsibleManager = responsibleManager;
     }
 
     public User getUser() {
@@ -62,5 +77,13 @@ public class Area {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<RedZones> getRedZones() {
+        return redZones;
+    }
+
+    public void setRedZones(Set<RedZones> redZones) {
+        this.redZones = redZones;
     }
 }
