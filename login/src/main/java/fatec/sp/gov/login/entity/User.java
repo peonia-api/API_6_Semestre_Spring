@@ -1,6 +1,7 @@
 package fatec.sp.gov.login.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -13,38 +14,41 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "usr_id")
+    @JsonView(Views.Public.class)
     private UUID id;
 
     @Column(name = "usr_name")
+    @JsonView(Views.Public.class)
     private String name;
 
     @Column(name = "usr_surname")
+    @JsonView(Views.Public.class)
     private String surname;
 
     @Column(name = "usr_password")
+    @JsonView(Views.Internal.class)
     private String password;
 
     @Column(name = "usr_email")
+    @JsonView(Views.Public.class)
     private String email;
 
     @Column(name = "usr_function")
+    @JsonView(Views.Public.class)
     private String function;
 
     @Column(name = "usr_permission_type")
     @Enumerated(EnumType.STRING)
+    @JsonView(Views.Public.class)
     private PermissionType permissionType;
 
-
-
-
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<RedZones> redZones = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Area> areas = new HashSet<>();
-
-
-
 
     public UUID getId() {
         return id;
@@ -116,17 +120,5 @@ public class User {
 
     public void setAreas(Set<Area> areas) {
         this.areas = areas;
-    }
-
-    @Override
-    public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", password=" + password +
-                ", email=" + email +
-                ", function=" + function +
-                '}';
     }
 }

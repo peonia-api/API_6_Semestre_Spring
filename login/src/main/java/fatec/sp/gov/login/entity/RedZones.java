@@ -1,6 +1,6 @@
 package fatec.sp.gov.login.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -11,29 +11,37 @@ public class RedZones {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "red_id")
+    @JsonView(Views.Public.class)
     private UUID id;
 
     @Column(name = "red_name")
+    @JsonView(Views.Public.class)
     private String name;
 
     @Column(name = "red_description")
+    @JsonView(Views.Public.class)
     private String description;
 
     @Column(name = "red_cameraSpot")
+    @JsonView(Views.Public.class)
     private String cameraSpot;
 
     @Column(name = "red_personLimit")
+    @JsonView(Views.Public.class)
     private int personLimit;
 
     @Column(name = "red_responsibleGuard")
+    @JsonView(Views.Public.class)
     private String responsibleGuard;
 
     @ManyToOne
     @JoinColumn(name = "area_id")
+    @JsonView(Views.Internal.class)
     private Area area;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonView(Views.Internal.class)
     private User user;
 
     public RedZones(UUID id, String name, String description, String cameraSpot, int personLimit, Area area, User user) {
@@ -46,6 +54,7 @@ public class RedZones {
         this.user = user;
     }
 
+    public RedZones() {}
 
     public UUID getId() {
         return id;
