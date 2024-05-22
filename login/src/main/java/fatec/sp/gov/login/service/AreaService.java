@@ -41,12 +41,12 @@ public class AreaService {
         area.setUser(user);
         return areaRepo.save(area);
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public List<Area> findAll() {
         return areaRepo.findAll();
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public Area findById(UUID id) {
         Optional<Area> area = areaRepo.findById(id);
         if (area.isEmpty()) {
