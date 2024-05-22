@@ -70,16 +70,28 @@ public class RedZonesServices {
                 redZones.getDescription() == null || redZones.getDescription().isBlank() ||
                 redZones.getCameraSpot() == null || redZones.getCameraSpot().isBlank() ||
                 redZones.getPersonLimit() <= 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid data");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid data");
         }
+
         return redRepo.findById(id).map(existingRedZones -> {
             existingRedZones.setName(redZones.getName());
             existingRedZones.setDescription(redZones.getDescription());
             existingRedZones.setCameraSpot(redZones.getCameraSpot());
             existingRedZones.setPersonLimit(redZones.getPersonLimit());
+            existingRedZones.setResponsibleGuard(redZones.getResponsibleGuard());
+
+            if (redZones.getArea() != null) {
+                existingRedZones.setArea(redZones.getArea());
+            }
+
+            if (redZones.getUser() != null) {
+                existingRedZones.setUser(redZones.getUser());
+            }
+
             return redRepo.save(existingRedZones);
-        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "red zone not found"));
+        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Red zone not found"));
     }
+
 
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public String deleteRedZones(UUID id) {
