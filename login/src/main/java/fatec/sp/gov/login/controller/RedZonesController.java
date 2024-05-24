@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -50,4 +51,10 @@ public class RedZonesController {
         return ResponseEntity.ok(service.updateRedZones(id, redZones));
     }
 
+    @GetMapping("/{id}/related-info")
+    @JsonView(Views.Internal.class)
+    public ResponseEntity<Map<String, Object>> getRelatedInfo(@PathVariable UUID id) {
+        Map<String, Object> relatedInfo = service.findRelatedInfoById(id);
+        return ResponseEntity.ok(relatedInfo);
+    }
 }

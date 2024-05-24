@@ -89,6 +89,7 @@ public class UserService {
             existingUser.setEmail(user.getEmail());
             existingUser.setFunction(user.getFunction());
             existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+            existingUser.setPermissionType(user.getPermissionType());
 
             return userRepo.save(existingUser);
         }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found"));

@@ -1,10 +1,10 @@
 package fatec.sp.gov.login.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
 import java.util.UUID;
-
 @Entity
 @Table(name = "redZones")
 public class RedZones {
@@ -36,12 +36,13 @@ public class RedZones {
 
     @ManyToOne
     @JoinColumn(name = "area_id")
-    @JsonView(Views.Internal.class)
+    @JsonBackReference
+    @JsonView(Views.Public.class)
     private Area area;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonView(Views.Internal.class)
+    @JsonView(Views.Public.class)
     private User user;
 
     public RedZones(UUID id, String name, String description, String cameraSpot, int personLimit, Area area, User user) {
@@ -119,6 +120,4 @@ public class RedZones {
     public void setUser(User user) {
         this.user = user;
     }
-
-
 }

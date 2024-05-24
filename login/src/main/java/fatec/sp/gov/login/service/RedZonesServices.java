@@ -1,8 +1,10 @@
 package fatec.sp.gov.login.service;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import fatec.sp.gov.login.entity.Area;
 import fatec.sp.gov.login.entity.RedZones;
 import fatec.sp.gov.login.entity.User;
+import fatec.sp.gov.login.entity.Views;
 import fatec.sp.gov.login.repository.AreaRepository;
 import fatec.sp.gov.login.repository.RedZonesRepository;
 import fatec.sp.gov.login.repository.UserRepository;
@@ -12,9 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class RedZonesServices {
@@ -33,6 +33,7 @@ public class RedZonesServices {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+    @JsonView(Views.Public.class)
     public RedZones createRedZones(RedZones redZones) {
         if (redZones == null || redZones.getName() == null || redZones.getName().isBlank() ||
                 redZones.getDescription() == null || redZones.getDescription().isBlank() ||
@@ -101,6 +102,24 @@ public class RedZonesServices {
         redRepo.deleteById(id);
         return "red zone deleted";
     }
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+    @JsonView(Views.Internal.class)
+    public Map<String, Object> findRelatedInfoById(UUID id) {
+        Optional<RedZones> redZoneOpt = redRepo.findById(id);
+        if (redZoneOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Red zone not found");
+        }
+
+        RedZones redZone = redZoneOpt.get();
+        Map<String, Object> relatedInfo = new HashMap<>();
+        relatedInfo.put("redZone", redZone);
+        relatedInfo.put("area", redZone.getArea());
+        relatedInfo.put("user", redZone.getUser());
+
+        return relatedInfo;
+    }
+
 
 
 }

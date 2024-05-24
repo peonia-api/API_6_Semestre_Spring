@@ -1,5 +1,7 @@
 package fatec.sp.gov.login.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 
@@ -34,6 +36,7 @@ public class Area {
     private User user;
 
     @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     @JsonView(Views.Public.class)
     private Set<RedZones> redZones = new HashSet<>();
 
