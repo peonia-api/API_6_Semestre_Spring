@@ -1,6 +1,5 @@
 package fatec.sp.gov.login.service;
 
-
 import fatec.sp.gov.login.entity.User;
 import fatec.sp.gov.login.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
 
     @PreAuthorize("isAuthenticated()")
     public User getCurrentUser() {
@@ -52,7 +50,6 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepo.save(user);
     }
-
 
     @PreAuthorize("hasRole('ADMIN')")
     public User findById(UUID id) {
@@ -95,5 +92,13 @@ public class UserService {
         }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found"));
     }
 
+    public void updatePassword(User user, String newPassword) {
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepo.save(user);
+    }
 
+    public User findByEmail(String email) {
+        return userRepo.searchByEmail(email).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    }
 }

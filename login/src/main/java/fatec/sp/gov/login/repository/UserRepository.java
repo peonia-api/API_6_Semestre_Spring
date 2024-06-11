@@ -15,6 +15,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     @Query("select u from User u where u.name = ?1")
     Optional<User> findByName(String nameUser);
 
+    @Query("select u from User u where u.email = ?1")
     Optional<User> searchByEmail(String email);
 
     List<User> findByNameContains(String nameUser);
@@ -26,8 +27,4 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     @Query("select u from User u where u.name = ?1 and u.password = ?2")
     Optional<User> searchByNameAndPassword(String nameUser, String password);
-
-
-
-
 }
