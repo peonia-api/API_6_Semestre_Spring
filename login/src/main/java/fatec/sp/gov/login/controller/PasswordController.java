@@ -19,13 +19,13 @@ public class PasswordController {
     public ResponseEntity<String> requestPasswordReset(@RequestBody Map<String, String> emailMap) {
         String email = emailMap.get("email");
         tokenService.createPasswordResetToken(email);
-        return ResponseEntity.ok("Password reset email sent");
+        return ResponseEntity.ok("Password reset code sent to email");
     }
 
     @PostMapping("/reset")
-    public ResponseEntity<String> resetPassword(@RequestParam("token") String token, @RequestBody Map<String, String> passwordMap) {
+    public ResponseEntity<String> resetPassword(@RequestParam("code") String code, @RequestBody Map<String, String> passwordMap) {
         String newPassword = passwordMap.get("newPassword");
-        tokenService.resetPassword(token, newPassword);
+        tokenService.resetPassword(code, newPassword);
         return ResponseEntity.ok("Password has been reset");
     }
 }

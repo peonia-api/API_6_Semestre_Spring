@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -27,26 +28,27 @@ public class PasswordResetTokenService {
             throw new RuntimeException("User not found");
         }
         PasswordResetToken token = new PasswordResetToken();
-        token.setToken(UUID.randomUUID().toString());
+        String code = String.format("%06d", new Random().nextInt(999999)); // Generate 6-digit code
+        token.setCode(code);
         token.setExpirationDate(new Date(System.currentTimeMillis() + 3600000)); // 1 hour expiration
         token.setUser(user);
         tokenRepository.save(token);
 
-        emailService.sendPasswordResetEmail(user.getEmail(), token.getToken());
+        emailService.sendPasswordResetEmail(user.getEmail(), code);
     }
 
-    public PasswordResetToken validatePasswordResetToken(String token) {
-        PasswordResetToken resetToken = tokenRepository.findByToken(token);
+    public PasswordResetToken validatePasswordResetToken(String code) {
+        PasswordResetToken resetToken = tokenRepository.findByCode(code);
         if (resetToken == null || resetToken.getExpirationDate().before(new Date())) {
-            throw new RuntimeException("Invalid or expired token");
+            throw new RuntimeException("Invalid or expired code");
         }
         return resetToken;
     }
 
-    public void resetPassword(String token, String newPassword) {
-        PasswordResetToken resetToken = validatePasswordResetToken(token);
+    public void resetPassword(String code, String newPassword) {
+        PasswordResetToken resetToken = validatePasswordResetToken(code);
         User user = resetToken.getUser();
         userService.updatePassword(user, newPassword);
-        tokenRepository.delete(resetToken); // Remove o token após a redefinição de senha
+        tokenRepository.delete(resetToken); // Remove the token after password reset
     }
 }

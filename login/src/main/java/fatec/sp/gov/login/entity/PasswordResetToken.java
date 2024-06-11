@@ -12,8 +12,8 @@ public class PasswordResetToken {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "token", nullable = false)
-    private String token;
+    @Column(name = "code", nullable = false)
+    private String code;
 
     @Column(name = "expiration_date", nullable = false)
     private Date expirationDate;
@@ -30,12 +30,12 @@ public class PasswordResetToken {
         this.id = id;
     }
 
-    public String getToken() {
-        return token;
+    public String getCode() {
+        return code;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Date getExpirationDate() {

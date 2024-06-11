@@ -11,12 +11,11 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendPasswordResetEmail(String to, String token) {
-        String url = "http://localhost:8080/reset-password?token=" + token;
+    public void sendPasswordResetEmail(String to, String code) {
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(to);
         email.setSubject("Password Reset Request");
-        email.setText("To reset your password, click the link below:\n" + url);
+        email.setText("Your password reset code is: " + code);
         mailSender.send(email);
     }
 }
