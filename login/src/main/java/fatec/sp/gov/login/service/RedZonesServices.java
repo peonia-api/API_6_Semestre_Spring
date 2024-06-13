@@ -32,6 +32,13 @@ public class RedZonesServices {
         return redRepo.findAll();
     }
 
+    public List<RedZones> findRedZonesByName(String name) {
+        if (name == null || name.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid name");
+        }
+        return redRepo.findByName(name);
+    }
+
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     @JsonView(Views.Public.class)
     public RedZones createRedZones(RedZones redZones) {

@@ -20,6 +20,12 @@ public class RedZonesController {
     @Autowired
     private RedZonesServices service;
 
+    @GetMapping("/searchByName")
+    @JsonView(Views.Public.class)
+    public ResponseEntity<List<RedZones>> getRedZonesByName(@RequestParam String name) {
+        return ResponseEntity.ok(service.findRedZonesByName(name));
+    }
+
     @GetMapping
     @JsonView(Views.Public.class)
     public ResponseEntity<List<RedZones>> getAllRedZones() {

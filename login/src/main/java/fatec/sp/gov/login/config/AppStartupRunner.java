@@ -15,7 +15,7 @@ public class AppStartupRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("EMAIL_USERNAME PORRA DO INFERNOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO: " + dotenv.get("EMAIL_USERNAME"));
+        System.out.println("EMAIL_USERNAME: " + dotenv.get("EMAIL_USERNAME"));
         System.out.println("EMAIL_PASSWORD: " + dotenv.get("EMAIL_PASSWORD"));
     }
 }

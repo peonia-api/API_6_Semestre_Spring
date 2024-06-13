@@ -5,3 +5,4 @@ public enum PermissionType {
     ROLE_MANAGER,
     ROLE_GUARD
 }
+
