@@ -58,4 +58,8 @@ public class RecordService {
     public List<Record> listAllRecords() {
         return recordRepository.findAll();
     }
+    
+    public List<Record> getRecordsByDateRange(LocalDateTime startDate, LocalDateTime endDate) {
+        return recordRepository.findByDateTimeBetween(startDate, endDate);
+    }
 }
